@@ -1,11 +1,39 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <div class="text-center">
+    <v-col cols="12" sm="8" md="6" class="text-center">
+      Hello, {{ fullName }}!
+      <v-text-field
+        v-model="firstName"
+        :rules="rules"
+        :counter="nameLimit"
+        hint="This field uses counter prop"
+        label="First Name"
+      />
+      <v-text-field
+        v-model="lastName"
+        :rules="rules"
+        :counter="nameLimit"
+        hint="This field uses counter prop"
+        label="Last Name"
+      />
+      <v-select
+        v-model="age"
+        placeholder="Your age"
+        :items="ages"
+        mandatory="0"
+      />
+      <v-radio-group v-model="sex" label="Your sex" row>
+        <v-radio label="Doesn't matter" value="0" />
+        <v-radio label="Male" value="1" />
+        <v-radio label="Female" value="2" />
+        <v-radio label="Font't know" value="3" />
+      </v-radio-group>
+      <v-file-input placeholder="Upload a photo..." />
+      <!-- <div class="text-center">
         <logo />
         <vuetify-logo />
       </div>
-      <v-card>
+      0<v-card>
         <v-card-title class="headline">
           Welcome to the Vuetify + Nuxt.js template
         </v-card-title>
@@ -75,19 +103,51 @@
           <v-spacer />
           <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
         </v-card-actions>
-      </v-card>
+      </v-card> -->
     </v-col>
   </v-row>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
+// import Logo from '~/components/Logo.vue'
+// import VuetifyLogo from '~/components/VuetifyLogo.vue'
+
+const NAME_LIMIT = 25;
+const AGE_FROM = 16;
+const AGE_TO = 50;
 
 export default {
   components: {
-    Logo,
-    VuetifyLogo,
+    // Logo,
+    // VuetifyLogo,
   },
-}
+  data() {
+    return {
+      firstName: 'Ivan',
+      lastName: 'Ivanov',
+      rules: [],
+      nameLimit: NAME_LIMIT,
+      sex: '0',
+      age: '0',
+      ages: [],
+    };
+  },
+  computed: {
+    fullName() {
+      return this.firstName.trim().length === 0 &&
+        this.lastName.trim().length === 0
+        ? 'user+'
+        : `${this.firstName} ${this.lastName}`;
+    },
+  },
+  mounted() {
+    this.ages.push(`It does not matter`);
+    this.ages.push(`Less than ${AGE_FROM}`);
+    for (let i = AGE_FROM; i < AGE_TO; i++) {
+      this.ages.push(`I'm ${i}`);
+    }
+    this.ages.push(`More than ${AGE_TO}`);
+    this.ages.push('I forgot');
+  },
+};
 </script>
