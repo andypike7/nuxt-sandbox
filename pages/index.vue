@@ -26,7 +26,7 @@
         <v-radio label="Doesn't matter" value="0" />
         <v-radio label="Male" value="1" />
         <v-radio label="Female" value="2" />
-        <v-radio label="Font't know" value="3" />
+        <v-radio label="Don't know" value="3" />
       </v-radio-group>
       <v-file-input placeholder="Upload a photo..." />
       <!-- <div class="text-center">
