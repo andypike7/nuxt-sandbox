@@ -23,7 +23,7 @@
         mandatory="0"
       />
       <v-radio-group v-model="sex" label="Your sex" row>
-        <v-radio label="Doesn't matter" value="0" />
+        <!-- <v-radio label="Doesn't matter" value="0" /> -->
         <v-radio label="Male" value="1" />
         <v-radio label="Female" value="2" />
         <v-radio label="Don't know" value="3" />
