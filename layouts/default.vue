@@ -7,6 +7,11 @@
       fixed
       app
     >
+      <div>
+        <nuxt-link class="nav-link" to="/" exact>Welcome</nuxt-link>
+        <nuxt-link class="nav-link" to="/inspire">Inspire</nuxt-link>
+        <nuxt-link class="nav-link" to="/404" no-prefetch>404</nuxt-link>
+      </div>
       <v-list>
         <v-list-item
           v-for="(item, i) in items"
@@ -57,12 +62,12 @@
       </v-list>
     </v-navigation-drawer>
     <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <span>Copyright &copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   data() {
     return {
@@ -89,3 +94,13 @@ export default {
   },
 };
 </script>
+
+<style>
+.nav-link {
+  text-decoration: none;
+  color: #aaa !important;
+}
+.nuxt-link-active {
+  color: white !important;
+}
+</style>

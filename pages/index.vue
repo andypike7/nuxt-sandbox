@@ -1,7 +1,14 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12" sm="8" md="6" class="text-center">
-      Hello, {{ fullName }}!
+      Hello, {{ fullName }}!<br />
+      Or {{ doubleName }}!<br />
+      Host: '{{ localHost }}'<br />
+      NavigationLink:
+      <NavigationLink url="/profile">
+        Профиль
+        <template v-slot:payload></template>
+      </NavigationLink>
       <v-text-field
         v-model="firstName"
         :rules="rules"
@@ -18,7 +25,8 @@
       />
       <v-select
         v-model="age"
-        placeholder="Your age"
+        label="Your age"
+        placeholder="Select..."
         :items="ages"
         mandatory="0"
       />
@@ -111,6 +119,9 @@
 <script>
 // import Logo from '~/components/Logo.vue'
 // import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import Vue from 'vue';
+import Config from '@/components/constants';
+import NavigationLink from '@/components/NavigationLink';
 
 const NAME_LIMIT = 25;
 const AGE_FROM = 16;
@@ -120,6 +131,7 @@ export default {
   components: {
     // Logo,
     // VuetifyLogo,
+    NavigationLink,
   },
   data() {
     return {
@@ -130,18 +142,23 @@ export default {
       sex: '0',
       age: '0',
       ages: [],
+      localHost: Config.host,
     };
   },
   computed: {
     fullName() {
+      console.log('*** Vue.version:', Vue.version);
       return this.firstName.trim().length === 0 &&
         this.lastName.trim().length === 0
-        ? 'user+'
+        ? 'user'
         : `${this.firstName} ${this.lastName}`;
+    },
+    doubleName() {
+      return this.fullName + ' | ' + this.fullName;
     },
   },
   mounted() {
-    this.ages.push(`It does not matter`);
+    this.ages.push(`It doesn't matter`);
     this.ages.push(`Less than ${AGE_FROM}`);
     for (let i = AGE_FROM; i < AGE_TO; i++) {
       this.ages.push(`I'm ${i}`);
